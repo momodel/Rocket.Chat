@@ -87,7 +87,7 @@ Template.body.onRendered(function() {
 
 	$(document.body).on('click', function(e) {
 		if (e.target.tagName === 'A') {
-			const link = e.currentTarget;
+			const link = e.target;
 			if (link.origin === s.rtrim(Meteor.absoluteUrl(), '/') && /msg=([a-zA-Z0-9]+)/.test(link.search)) {
 				e.preventDefault();
 				e.stopPropagation();
