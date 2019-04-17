@@ -87,17 +87,14 @@ Template.body.onRendered(function() {
 
 	$(document.body).on('click', function(e) {
 		if (e.target.tagName === 'A') {
-			const link = e.target;
-			if (link.origin === s.rtrim(Meteor.absoluteUrl(), '/') && /msg=([a-zA-Z0-9]+)/.test(link.search)) {
-				e.preventDefault();
-				e.stopPropagation();
-				if (Layout.isEmbedded()) {
-					return fireGlobalEvent('click-message-link', {
-						link: link.pathname + link.search,
-					});
-				}
-				return FlowRouter.go(link.pathname + link.search, null, FlowRouter.current().queryParams);
+			const link = e.currentTarget;
+			e.stopPropagation();
+			if (Layout.isEmbedded()) {
+				return fireGlobalEvent('click-message-link', {
+					link: link.pathname + link.search,
+				});
 			}
+			return FlowRouter.go(link.pathname + link.search, null, FlowRouter.current().queryParams);
 		}
 	});
 
